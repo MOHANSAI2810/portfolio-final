@@ -1,37 +1,97 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import profilePic from '../assets/profile.jpg';
+import { FiMenu, FiX } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const navItems = ['home', 'about', 'projects', 'contact'];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-black/70 backdrop-blur-md border-b border-transparent">
-      <div className="flex justify-between items-center px-6 py-3">
-        {/* Profile Picture - smaller size */}
-        <div className="flex items-center">
-<img
-  src={profilePic}
-  alt="Profile"
-  className="w-30 h-30 rounded-full border-2 border-gradient-to-br from-purple-500 to-pink-500"
-/>
+    <motion.header 
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+      className={`fixed top-0 left-0 w-full z-50 ${
+        scrolled ? 'bg-black/90 backdrop-blur-md border-b border-gray-800' : 'bg-transparent'
+      } transition-all duration-300`}
+    >
+      <div className="container mx-auto flex justify-between items-center px-6 py-3">
 
-        </div>
+        {/* Profile Picture + Name */}
+        <motion.div 
+          whileHover={{ scale: 1.05 }}
+          className="flex items-center space-x-4"
+        >
+          <motion.img
+            src={profilePic}
+            alt="Profile"
+            whileHover={{ rotate: 5 }}
+            className="w-16 h-16 rounded-full border-4 border-transparent bg-gradient-to-br from-purple-500 to-pink-500 p-0.5 shadow-lg"
+          />
+          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 text-transparent bg-clip-text">
+            P Mohan Sai
+          </h1>
+        </motion.div>
 
-        {/* Navigation Buttons */}
-        <nav className="flex space-x-6 pr-2">
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex space-x-4">
           {navItems.map((item) => (
-<a
-  key={item}
-  href={`#${item}`}
-  className="capitalize text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-pink-400 to-yellow-400 text-2xl px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-95 hover:opacity-70 cursor-pointer"
->
-  {item}
-</a>
-
+            <motion.a
+              key={item}
+              href={`#${item}`}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="capitalize text-white/80 hover:text-white text-lg px-4 py-2 rounded-md transition-all duration-300 relative group"
+            >
+              {item}
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 transition-all duration-300 group-hover:w-full"></span>
+            </motion.a>
           ))}
         </nav>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden text-white text-2xl z-50"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <FiX size={28} /> : <FiMenu size={28} />}
+        </button>
+
+        {/* Mobile Nav Overlay */}
+        {menuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', stiffness: 100 }}
+            className="md:hidden fixed inset-0 bg-black/95 backdrop-blur-lg flex flex-col items-center justify-center space-y-8"
+          >
+            {navItems.map((item) => (
+              <motion.a
+                key={item}
+                href={`#${item}`}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="capitalize text-3xl font-medium text-white/90 hover:text-white px-8 py-4"
+                onClick={() => setMenuOpen(false)}
+              >
+                {item}
+              </motion.a>
+            ))}
+          </motion.div>
+        )}
       </div>
-    </header>
+    </motion.header>
   );
 };
 
