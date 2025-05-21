@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import { motion } from 'framer-motion';
 import Skills from './components/Skills';
+import Contact from './components/Contact';
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -85,18 +86,12 @@ const App = () => {
 
         <section 
           id="contact" 
-          className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-800 to-black py-20"
+
         >
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={sectionVariants}
-            className="container mx-auto px-6 max-w-2xl"
-          >
-            <h1 className="text-4xl font-bold mb-12 text-center">Get In Touch</h1>
-            {/* Contact form will go here */}
-          </motion.div>
+          
+
+            <Contact />
+          
         </section>
       </main>
     </div>
