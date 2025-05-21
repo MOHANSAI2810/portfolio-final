@@ -6,7 +6,8 @@ import { motion } from 'framer-motion';
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const navItems = ['home', 'about', 'projects', 'contact'];
+  // Added 'skills' to the navItems array after 'about'
+  const navItems = ['home', 'about', 'skills', 'projects', 'contact'];
 
   useEffect(() => {
     const handleScroll = () => {

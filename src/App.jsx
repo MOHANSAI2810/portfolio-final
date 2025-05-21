@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import { motion } from 'framer-motion';
+import Skills from './components/Skills';
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -61,6 +62,9 @@ const App = () => {
               </div>
             </div>
           </motion.div>
+        </section>
+        <section id="skills" className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-black py-20">
+          <Skills />
         </section>
 
         <section 
