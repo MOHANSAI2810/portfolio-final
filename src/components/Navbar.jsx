@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import profilePic from '../assets/profile.jpg';
+
 import { FiMenu, FiX } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
@@ -33,12 +33,7 @@ const Navbar = () => {
           whileHover={{ scale: 1.05 }}
           className="flex items-center space-x-4"
         >
-          <motion.img
-            src={profilePic}
-            alt="Profile"
-            whileHover={{ rotate: 5 }}
-            className="w-16 h-16 rounded-full border-4 border-transparent bg-gradient-to-br from-purple-500 to-pink-500 p-0.5 shadow-lg"
-          />
+          
           <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 text-transparent bg-clip-text">
             P Mohan Sai
           </h1>

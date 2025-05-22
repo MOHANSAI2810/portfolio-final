@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import { motion } from 'framer-motion';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
+import Home from './components/Home';
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -15,24 +16,8 @@ const App = () => {
       <Navbar />
 
       <main className="pt-24">
-        <section 
-          id="home" 
-          className="min-h-screen flex items-center justify-center relative overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-pink-900/20"></div>
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={sectionVariants}
-            className="container mx-auto px-6 text-center z-10"
-          >
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 text-transparent bg-clip-text">
-              Welcome to My Portfolio
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto">
-              I create beautiful, functional digital experiences
-            </p>
-          </motion.div>
+        <section>
+          <Home/>
         </section>
 
         <section 
