@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Home from './components/Home';
-import ProjectsSection from './components/ProjectsSection';
+import ProjectsSection from './components/Projects';
+import Projects from './components/Projects';
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -54,16 +55,8 @@ const App = () => {
           <Skills />
         </section>
 
-        <section>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={sectionVariants}
-            className="container mx-auto px-6"
-          >
-            <ProjectsSection/>
-          </motion.div>
+        <section id='projects'>
+          <Projects/>
         </section>
 
         <section 
