@@ -11,23 +11,7 @@ const Home = () => {
       <div className="max-w-3xl text-center -mt-20">
 
         {/* Profile Pic with Hover Name Overlay (No background circle) */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="mb-6 flex justify-center"
-        >
-          <div className="relative group p-1 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400">
-            <img
-  src="/profile.jpg"
-  alt="Profile"
-  title="P Mohan Sai"
-  className="w-36 h-36 sm:w-40 sm:h-40 rounded-full object-cover cursor-pointer"
-/>
 
-            
-          </div>
-        </motion.div>
 
         {/* Title */}
 {/* Title */}
