@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Home from './components/Home';
+import ProjectsSection from './components/ProjectsSection';
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -53,10 +54,7 @@ const App = () => {
           <Skills />
         </section>
 
-        <section 
-          id="projects" 
-          className="min-h-screen flex items-center justify-center py-20"
-        >
+        <section>
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -64,8 +62,7 @@ const App = () => {
             variants={sectionVariants}
             className="container mx-auto px-6"
           >
-            <h1 className="text-4xl font-bold mb-12 text-center">My Projects</h1>
-            {/* Projects grid will go here */}
+            <ProjectsSection/>
           </motion.div>
         </section>
 
