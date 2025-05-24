@@ -71,7 +71,7 @@ const Home = () => {
           </a>
 
           <a
-            href="/resume.jpg"
+            href="/resume.pdf"
             download
             target="_blank"
             rel="noopener noreferrer"

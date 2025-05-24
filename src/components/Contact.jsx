@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Github, Linkedin, Send } from 'lucide-react';
+import { ChevronUp } from 'lucide-react';
+
 
 const Contact = () => {
   const [formStatus, setFormStatus] = useState('');
@@ -73,25 +75,40 @@ const Contact = () => {
           </p>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-8 items-stretch">
-          {/* Contact Form - Taller and Narrower */}
+        <div className="flex flex-col lg:flex-row gap-8 items-stretch relative">
+          {/* Dotted vertical divider */}
+          <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px">
+            <div className="h-full w-full bg-gradient-to-b from-transparent via-gray-600 to-transparent opacity-30" 
+              style={{
+                backgroundImage: 'linear-gradient(to bottom, transparent, transparent 50%, #4B5563 50%, transparent)',
+                backgroundSize: '1px 10px',
+                backgroundRepeat: 'repeat-y'
+              }}
+            />
+          </div>
+
+          {/* Contact Form - with gradient border */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="w-full lg:w-1/2"
+            className="w-full lg:w-1/2 relative"
           >
+            {/* Gradient border */}
+            <div className="absolute -inset-0.5 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl opacity-70 blur-sm group-hover:opacity-100 transition duration-1000"></div>
+            
             <form
               onSubmit={handleSubmit}
               name="contact"
               method="POST"
               data-netlify="true"
-              className="bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] p-8 rounded-2xl border border-gray-800 shadow-xl h-full"
+              className="relative bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] p-8 rounded-2xl border border-transparent shadow-xl h-full"
             >
+              <div className="absolute -inset-0.5 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl -z-10"></div>
               <input type="hidden" name="form-name" value="contact" />
               <div className="space-y-6 h-full flex flex-col">
-                <div className="space-y-4 flex-grow">
+                <div className="space-y-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-1">
                       Your Name
@@ -166,16 +183,21 @@ const Contact = () => {
             </form>
           </motion.div>
 
-          {/* Contact Info - Enhanced */}
+          {/* Contact Info - with gradient border */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
-            className="w-full lg:w-1/2"
+            className="w-full lg:w-1/2 relative"
           >
-            <div className="bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border border-gray-800 rounded-2xl p-8 shadow-xl h-full">
-              <h3 className="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
+            {/* Gradient border */}
+            <div className="absolute -inset-0.5 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl opacity-70 blur-sm group-hover:opacity-100 transition duration-1000"></div>
+            
+            <div className="relative bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border border-transparent rounded-2xl p-8 shadow-xl h-full">
+              <div className="absolute -inset-0.5 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-2xl -z-10"></div>
+              
+              <h3 className="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
                 Contact Information
               </h3>
               
@@ -188,10 +210,10 @@ const Contact = () => {
                   <div>
                     <h4 className="text-sm font-medium text-gray-400">Email</h4>
                     <a 
-                      href="mailto:mohansai2810@gmail.com" 
+                      href="pushadapumohansai@gmail.com" 
                       className="text-white hover:underline"
                     >
-                      mohansai2810@gmail.com
+                      pushadapumohansai@gmail.com
                     </a>
                   </div>
                 </motion.div>
@@ -207,7 +229,7 @@ const Contact = () => {
                       href="tel:+919876543210" 
                       className="text-white hover:underline"
                     >
-                      +91 98765 43210
+                      +91 74166 98427
                     </a>
                   </div>
                 </motion.div>
@@ -219,7 +241,7 @@ const Contact = () => {
                   <MapPin className="w-6 h-6 text-blue-400 mt-1 flex-shrink-0" />
                   <div>
                     <h4 className="text-sm font-medium text-gray-400">Location</h4>
-                    <p className="text-white">Hyderabad, India</p>
+                    <p className="text-white">Vuyyuru, India</p>
                   </div>
                 </motion.div>
 
@@ -259,13 +281,42 @@ const Contact = () => {
                   </div>
                 </motion.div>
               </div>
-
-              {/* Availability Status */}
-              
             </div>
           </motion.div>
         </div>
+        {/* Footer Section */}
+<div className="mt-16 border-t border-gray-700 pt-8 text-center text-sm text-gray-500">
+  <p className="mb-2">
+    © {new Date().getFullYear()} <span className="text-white font-semibold"></span>. All rights reserved.
+  </p>
+  <p>
+    Built with <span className="text-pink-400">React</span>, <span className="text-purple-400">Tailwind CSS</span>, and ❤️
+  </p>
+</div>
+
       </div>
+<motion.div
+  className="fixed bottom-6 right-6 z-50 group"
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.95 }}
+>
+  {/* Tooltip */}
+  <span className="absolute bottom-14 right-1/2 translate-x-1/2 px-3 py-1 text-xs text-white bg-gray-800 rounded shadow opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+    Top
+  </span>
+
+  {/* Button */}
+  <button
+    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+    className="w-12 h-12 flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full shadow-lg hover:shadow-pink-400/50 transition-all"
+    aria-label="Back to top"
+  >
+    <ChevronUp className="w-6 h-6" />
+  </button>
+</motion.div>
+
+
+
     </section>
   );
 };
