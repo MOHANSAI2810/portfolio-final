@@ -14,7 +14,7 @@ const projects = [
     image: 'sms-spam.png',
     name: 'Email Spam Detection',
     description: 'Helps to classify whether the email is spam or not.',
-    techStack: ['ML', 'Python', 'Streamlit', 'HTML','CSS','JS'],
+    techStack: ['ML', 'Python', 'Streamlit', 'HTML'],
     liveLink: 'https://sms-spam-classification-machine-learning.streamlit.app/',
     codeLink: 'https://github.com/MOHANSAI2810/email-spam-classification',
   },
@@ -22,7 +22,7 @@ const projects = [
     image: '/traffic.png',
     name: 'Traffic Management System',
     description: 'Enhances the traffic updates to give better routes.',
-    techStack: ['Python', 'Flask', 'HTML','CSS','JS'],
+    techStack: ['ML','Python', 'Flask'],
     liveLink: 'https://github.com/MOHANSAI2810/traffic-management-system',
     codeLink: 'https://github.com/MOHANSAI2810/traffic-management-system',
   },
@@ -38,7 +38,7 @@ const projects = [
     image: 'telegram-bot.png',
     name: 'Telegram Bot',
     description: 'Conversational telegram bot for user support using AI.',
-    techStack: ['Python', 'Flask', 'AI'],
+    techStack: ['Python', 'Flask', 'AI','API'],
     liveLink: 'https://web.telegram.org/k/#@Mohan_mini_chatbot',
     codeLink: 'https://github.com/MOHANSAI2810/telegram_bot',
   },
@@ -47,7 +47,7 @@ const projects = [
 const Projects = () => {
   return (
     <section id="projects" className="py-16 px-6 sm:px-10 lg:px-20 bg-black text-white">
-      <h2 className="text-4xl font-bold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
+      <h2 className="text-4xl font-bold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
         My Work
       </h2>
       <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
