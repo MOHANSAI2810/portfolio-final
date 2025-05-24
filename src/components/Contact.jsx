@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Github, Linkedin, Send } from 'lucide-react';
-import { ChevronUp } from 'lucide-react';
-
+import { Mail, Phone, MapPin, Github, Linkedin, Send, ChevronUp } from 'lucide-react';
 
 const Contact = () => {
   const [formStatus, setFormStatus] = useState('');
@@ -27,14 +25,28 @@ const Contact = () => {
       return;
     }
 
-    e.target.submit(); // Needed for Netlify
-    setFormStatus('Thanks! Your message has been submitted.');
-    setFormData({ name: '', email: '', message: '' });
+    try {
+      const formDataEncoded = new FormData();
+      formDataEncoded.append("form-name", "contact");
+      formDataEncoded.append("name", formData.name);
+      formDataEncoded.append("email", formData.email);
+      formDataEncoded.append("message", formData.message);
+
+      await fetch("/", {
+        method: "POST",
+        body: formDataEncoded,
+      });
+
+      setFormStatus('Thanks! Your message has been submitted.');
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      setFormStatus('Oops! Something went wrong.');
+    }
   };
 
   return (
     <section id="contact" className="w-full py-20 bg-black text-white relative overflow-hidden">
-      {/* Floating background elements */}
+      {/* Floating Background */}
       <div className="absolute inset-0 overflow-hidden opacity-10">
         {[...Array(5)].map((_, i) => (
           <motion.div
@@ -75,10 +87,17 @@ const Contact = () => {
           </p>
         </motion.div>
 
+        {/* ✅ Hidden Netlify Form for Build Detection */}
+        <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+          <input type="text" name="name" />
+          <input type="email" name="email" />
+          <textarea name="message"></textarea>
+        </form>
+
         <div className="flex flex-col lg:flex-row gap-8 items-stretch relative">
-          {/* Dotted vertical divider */}
+          {/* Divider */}
           <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px">
-            <div className="h-full w-full bg-gradient-to-b from-transparent via-gray-600 to-transparent opacity-30" 
+            <div className="h-full w-full bg-gradient-to-b from-transparent via-gray-600 to-transparent opacity-30"
               style={{
                 backgroundImage: 'linear-gradient(to bottom, transparent, transparent 50%, #4B5563 50%, transparent)',
                 backgroundSize: '1px 10px',
@@ -87,7 +106,7 @@ const Contact = () => {
             />
           </div>
 
-          {/* Contact Form - with gradient border */}
+          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -95,29 +114,28 @@ const Contact = () => {
             viewport={{ once: true }}
             className="w-full lg:w-1/2 relative"
           >
-            {/* Gradient border */}
             <div className="absolute -inset-0.5 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl opacity-70 blur-sm group-hover:opacity-100 transition duration-1000"></div>
-            
+
             <form
               onSubmit={handleSubmit}
               name="contact"
-              method="POST"
               data-netlify="true"
+              data-netlify-honeypot="bot-field"
               className="relative bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] p-8 rounded-2xl border border-transparent shadow-xl h-full"
             >
               <div className="absolute -inset-0.5 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl -z-10"></div>
               <input type="hidden" name="form-name" value="contact" />
+              <input type="hidden" name="bot-field" />
+
               <div className="space-y-6 h-full flex flex-col">
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-1">
-                      Your Name
-                    </label>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-1">Your Name</label>
                     <input
                       type="text"
                       id="name"
                       name="name"
-                      placeholder="John Doe"
+                      placeholder="Enter Name"
                       value={formData.name}
                       onChange={handleChange}
                       className="w-full px-4 py-3 bg-[#2c2c2c] text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
@@ -126,14 +144,12 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-1">
-                      Email Address
-                    </label>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-1">Email Address</label>
                     <input
                       type="email"
                       id="email"
                       name="email"
-                      placeholder="john@example.com"
+                      placeholder="Enter mail id"
                       value={formData.email}
                       onChange={handleChange}
                       className="w-full px-4 py-3 bg-[#2c2c2c] text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
@@ -142,14 +158,12 @@ const Contact = () => {
                   </div>
 
                   <div className="flex-grow">
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-1">
-                      Your Message
-                    </label>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-1">Your Message</label>
                     <textarea
                       id="message"
                       name="message"
                       rows="8"
-                      placeholder="Hello, I'd like to talk about..."
+                      placeholder="Drop your message..."
                       value={formData.message}
                       onChange={handleChange}
                       className="w-full h-full min-h-[200px] px-4 py-3 bg-[#2c2c2c] text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
@@ -210,7 +224,7 @@ const Contact = () => {
                   <div>
                     <h4 className="text-sm font-medium text-gray-400">Email</h4>
                     <a 
-                      href="pushadapumohansai@gmail.com" 
+                      href="mailto:pushadapumohansai@gmail.com" 
                       className="text-white hover:underline"
                     >
                       pushadapumohansai@gmail.com
@@ -249,12 +263,12 @@ const Contact = () => {
                   whileHover={{ x: 5 }}
                   className="flex items-start gap-4 p-3 bg-[#2c2c2c] rounded-lg border border-gray-700"
                 >
-                  <Github className="w-6 h-6 text-white mt-1 flex-shrink-0" />
+                  <Github className="w-6 h-6 text-gray-400 mt-1 flex-shrink-0" />
                   <div>
                     <h4 className="text-sm font-medium text-gray-400">GitHub</h4>
-                    <a 
-                      href="https://github.com/MOHANSAI2810" 
-                      target="_blank" 
+                    <a
+                      href="https://github.com/pusha-da"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-white hover:underline"
                     >
@@ -267,16 +281,16 @@ const Contact = () => {
                   whileHover={{ x: 5 }}
                   className="flex items-start gap-4 p-3 bg-[#2c2c2c] rounded-lg border border-gray-700"
                 >
-                  <Linkedin className="w-6 h-6 text-blue-500 mt-1 flex-shrink-0" />
+                  <Linkedin className="w-6 h-6 text-blue-600 mt-1 flex-shrink-0" />
                   <div>
                     <h4 className="text-sm font-medium text-gray-400">LinkedIn</h4>
-                    <a 
-                      href="https://linkedin.com/in/mohansai2810" 
-                      target="_blank" 
+                    <a
+                      href="https://www.linkedin.com/in/pusha-da/"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-white hover:underline"
                     >
-                      linkedin.com/in/mohansai2810
+                      linkedin.com/in/MOHANSAI2810
                     </a>
                   </div>
                 </motion.div>
@@ -284,18 +298,8 @@ const Contact = () => {
             </div>
           </motion.div>
         </div>
-        {/* Footer Section */}
-<div className="mt-16 border-t border-gray-700 pt-8 text-center text-sm text-gray-500">
-  <p className="mb-2">
-    © {new Date().getFullYear()} <span className="text-white font-semibold"></span>. All rights reserved.
-  </p>
-  <p>
-    Built with <span className="text-pink-400">React</span>, <span className="text-purple-400">Tailwind CSS</span>, and ❤️
-  </p>
-</div>
 
-      </div>
-<motion.div
+        <motion.div
   className="fixed bottom-6 right-6 z-50 group"
   whileHover={{ scale: 1.1 }}
   whileTap={{ scale: 0.95 }}
@@ -314,9 +318,15 @@ const Contact = () => {
     <ChevronUp className="w-6 h-6" />
   </button>
 </motion.div>
-
-
-
+        <div className="mt-16 border-t border-gray-700 pt-8 text-center text-sm text-gray-500">
+  <p className="mb-2">
+    © {new Date().getFullYear()} <span className="text-white font-semibold"></span>. All rights reserved.
+  </p>
+  <p>
+    Built with <span className="text-pink-400">React</span>, <span className="text-purple-400">Tailwind CSS</span>, and ❤️
+  </p>
+</div>
+      </div>
     </section>
   );
 };
