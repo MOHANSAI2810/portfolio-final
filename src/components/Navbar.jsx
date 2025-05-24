@@ -65,26 +65,27 @@ const Navbar = () => {
 
         {/* Mobile Nav Overlay */}
         {menuOpen && (
-          <motion.div 
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'spring', stiffness: 100 }}
-            className="md:hidden fixed inset-0 bg-black/95 backdrop-blur-lg flex flex-col items-center justify-center space-y-8"
-          >
-            {navItems.map((item) => (
-              <motion.a
-                key={item}
-                href={`#${item}`}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="capitalize text-3xl font-medium text-white/90 hover:text-white px-8 py-4"
-                onClick={() => setMenuOpen(false)}
-              >
-                {item}
-              </motion.a>
-            ))}
-          </motion.div>
+<motion.div 
+  initial={{ opacity: 0, x: '100%' }}
+  animate={{ opacity: 1, x: 0 }}
+  exit={{ opacity: 0, x: '100%' }}
+  transition={{ type: 'spring', stiffness: 100 }}
+  className="md:hidden fixed top-0 right-0 h-80 w-64 bg-black/95 backdrop-blur-lg flex flex-col items-center justify-center space-y-4 shadow-lg"
+>
+  {navItems.map((item) => (
+    <motion.a
+      key={item}
+      href={`#${item}`}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      className="capitalize text-lg font-medium text-white/90 hover:text-white px-6 py-2"
+      onClick={() => setMenuOpen(false)}
+    >
+      {item}
+    </motion.a>
+  ))}
+</motion.div>
+
         )}
       </div>
     </motion.header>

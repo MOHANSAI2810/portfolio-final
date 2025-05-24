@@ -8,6 +8,7 @@ const Home = () => {
       id="home"
       className="w-full min-h-screen bg-black text-white flex items-center justify-center px-4"
     >
+      
       <div className="max-w-3xl text-center -mt-20">
 
         {/* Profile Pic with Hover Name Overlay (No background circle) */}
