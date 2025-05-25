@@ -54,7 +54,7 @@ const Home = () => {
           className="flex flex-wrap justify-center gap-4"
         >
           <a
-            href="https://www.linkedin.com/in/mohansai2810"
+            href="https://www.linkedin.com/in/mohansai28/"
             target="_blank"
             rel="noopener noreferrer"
             title="Go to LinkedIn"

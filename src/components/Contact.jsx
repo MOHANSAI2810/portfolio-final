@@ -17,32 +17,34 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.message) {
-      setFormStatus('Please fill out all fields.');
-      return;
-    }
+  if (!formData.name || !formData.email || !formData.message) {
+    setFormStatus('Please fill out all fields.');
+    return;
+  }
 
-    try {
-      const formDataEncoded = new FormData();
-      formDataEncoded.append("form-name", "contact");
-      formDataEncoded.append("name", formData.name);
-      formDataEncoded.append("email", formData.email);
-      formDataEncoded.append("message", formData.message);
+  try {
+    const response = await fetch("https://formspree.io/f/xvgajkky", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-      await fetch("/", {
-        method: "POST",
-        body: formDataEncoded,
-      });
-
+    if (response.ok) {
       setFormStatus('Thanks! Your message has been submitted.');
       setFormData({ name: '', email: '', message: '' });
-    } catch (error) {
+    } else {
       setFormStatus('Oops! Something went wrong.');
     }
-  };
+  } catch (error) {
+    setFormStatus('Oops! Something went wrong.');
+  }
+};
+
 
   return (
     <section id="contact" className="w-full py-20 bg-black text-white relative overflow-hidden">
@@ -117,15 +119,12 @@ const Contact = () => {
             <div className="absolute -inset-0.5 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl opacity-70 blur-sm group-hover:opacity-100 transition duration-1000"></div>
 
             <form
-              onSubmit={handleSubmit}
-              name="contact"
-              data-netlify="true"
-              data-netlify-honeypot="bot-field"
-              className="relative bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] p-8 rounded-2xl border border-transparent shadow-xl h-full"
-            >
+  onSubmit={handleSubmit}
+  className="relative bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] p-8 rounded-2xl border border-transparent shadow-xl h-full"
+>
+
               <div className="absolute -inset-0.5 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl -z-10"></div>
-              <input type="hidden" name="form-name" value="contact" />
-              <input type="hidden" name="bot-field" />
+              
 
               <div className="space-y-6 h-full flex flex-col">
                 <div className="space-y-4">
@@ -267,7 +266,7 @@ const Contact = () => {
                   <div>
                     <h4 className="text-sm font-medium text-gray-400">GitHub</h4>
                     <a
-                      href="https://github.com/pusha-da"
+                      href="https://github.com/mohansai2810"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-white hover:underline"
@@ -285,12 +284,12 @@ const Contact = () => {
                   <div>
                     <h4 className="text-sm font-medium text-gray-400">LinkedIn</h4>
                     <a
-                      href="https://www.linkedin.com/in/pusha-da/"
+                      href="https://www.linkedin.com/in/mohansai28/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-white hover:underline"
                     >
-                      linkedin.com/in/MOHANSAI2810
+                      linkedin.com/in/mohansai28/
                     </a>
                   </div>
                 </motion.div>
