@@ -24,8 +24,5 @@ It took **1 week** of focused effort to bring this portfolio to life—a testame
 ## 🔗 Live Site
 👉 [Visit My Portfolio](https://mohan-portfolio-main.netlify.app/)
 
-## 🙏 Special Thanks
-A heartfelt thank you to **DATASCIENCE NRIIT** for their constant support and encouragement throughout this journey.
-
 ## 💬 Feedback Welcome!
 I’d love to hear your thoughts and suggestions—your feedback will help me continue to grow and improve!
